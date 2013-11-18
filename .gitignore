@@ -1,0 +1,14 @@
+.idea/workspace.xml
+app/cache/*
+app/logs/*
+.metadata
+.gradle
+bin/
+tmp/
+target/
+.tmp
+.idea
+.idea/
+idea/
+*.idea/
+workspace.xml

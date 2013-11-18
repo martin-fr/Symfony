@@ -1,0 +1,7 @@
+parameters:
+#    dreams_user.example.class: Dreams\UserBundle\Example
+
+services:
+#    dreams_user.example:
+#        class: %dreams_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

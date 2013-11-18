@@ -1,0 +1,7 @@
+parameters:
+#    dreams_comment.example.class: Dreams\CommentBundle\Example
+
+services:
+#    dreams_comment.example:
+#        class: %dreams_comment.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
