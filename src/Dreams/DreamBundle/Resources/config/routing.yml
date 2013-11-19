@@ -1,3 +1,20 @@
 dreams_dream_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: DreamsDreamBundle:Default:index }
+
+dreams_dream_show:
+  pattern: /dream/show
+  defaults: { _controller: DreamsDreamBundle:Dream:show }
+
+dreams_dream_create:
+  pattern: /dream/create
+  defaults: { _controller: DreamsDreamBundle:Dream:create }
+
+dreams_dream_edit:
+  pattern: /dream/edit/{id}
+  defaults: { _controller: DreamsDreamBundle:Dream:edit }
+
+dreams_dream_delete:
+  pattern: /dream/delete/{id}
+  defaults: { _controller: DreamsDreamBundle:Dream:delete }
+

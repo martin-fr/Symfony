@@ -1,0 +1,70 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Martin
+ * Date: 18/11/13
+ * Time: 17:24
+ */
+
+namespace Dreams\DreamBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Dreams\DreamBundle\Entity\Dream
+ *
+ * @ORM\Entity(repositoryClass="Dreams\DreamBundle\Entity\DreamRepository")
+ * @ORM\Table(name="dreams")
+ */
+class Dream {
+
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string",length=50)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="decimal")
+     */
+    private $note;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateCreation;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateModification;
+
+    /**
+     * @ORM\Column(type="string",length=50)
+     */
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="dreams", cascade={"persist", "merge"})
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime('now');
+        $this->dateModification = new \DateTime('now');
+    }
+
+}

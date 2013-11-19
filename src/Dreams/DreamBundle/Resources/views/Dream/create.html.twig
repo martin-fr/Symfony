@@ -1,0 +1,22 @@
+{% extends "DreamsDreamBundle::base.html.twig" %}
+
+{% block title %} Ajouter un rêve {% endblock %}
+
+{% block content %}
+
+    <h1>Ajouter un rêve</h1>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <div class="well">
+        <form action="" method="post" {{ form_enctype(form) }} class="bs-example form-horizontal">
+            {{ form_widget(form) }}
+            <input type="submit" />
+        </form>
+    </div>
+
+    <p><a href="{{ path('dreams_dream_show') }}">Retour à la liste des rêves</a></p>
+
+{% endblock %}
