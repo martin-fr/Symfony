@@ -17,9 +17,9 @@ class DreamForm extends AbstractType {
     public function buildForm(FormBuilderInterface  $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('category', 'choice', array('choices' => array('R'=>'Rêve','C'=>'Cauchemar')))
+            ->add('title', 'text', array('label' => 'Titre', 'max_length' => 50))
+            ->add('description', 'text', array('label' => 'Description', 'max_length' => 500))
+            ->add('category', 'choice', array('label' => 'Titre'), array('choices' => array('R'=>'Rêve','C'=>'Cauchemar')))
         ;
     }
 

@@ -4,19 +4,56 @@
 
 {% block content %}
 
-    <h1>Ajouter un rêve</h1>
+    <h2>Ajouter un rêve</h2><br />
 
     {% if message %}
         <p>{{ message }}</p>
     {% endif %}
 
-    <div class="well">
-        <form action="" method="post" {{ form_enctype(form) }} class="bs-example form-horizontal">
-            {{ form_widget(form) }}
-            <input type="submit" />
-        </form>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well">
+                <form class="bs-example form-horizontal">
+                    <fieldset>
+                        <legend>Ajout d'un rêve</legend>
+                        <div class="form-group">
+                            <label for="form_title" class="col-lg-2 control-label">Titre</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="title" placeholder="Titre" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form_description" class="col-lg-2 control-label">Description</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="7" id="description" maxlength="500" placeholder="Description"></textarea>
+                                <span class="help-block">La description du rêve ne doit pas dépasser 500 caractères.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Catégorie</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="select">
+                                    <option>Rêve</option>
+                                    <option>Cauchemar</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-4">
+                                <button class="btn btn-default">Annuler</button>
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
     </div>
 
-    <p><a href="{{ path('dreams_dream_show') }}">Retour à la liste des rêves</a></p>
+        <ul class="pager">
+            <li><a href="{{ path('dreams_dream_show') }}">Retour à la liste des rêves</a></li>
+        </ul>
 
 {% endblock %}
