@@ -34,18 +34,22 @@ class DreamController extends ContainerAware {
         if ($request->getMethod() == 'POST')
         {
             $form->bind($request);
-
-            //if ($form->isValid())
-            //{
+/*
+            echo "<pre>";
+            echo print_r($form->getErrors());
+            echo "</pre>";exit;
+*/
+            if ($form->isValid())
+            {
                 $em = $this->container->get('doctrine')->getEntityManager();
                 $em->persist($dream);
                 $em->flush();
                 $message = 'Rêve ajouté avec succès ! :-)';
-            /*}
+            }
             else {
                 $message = 'L\'ajout de votre rêve a échoué ! :-(';
                 $error = 1;
-            }*/
+            }
         }
 
         return $this->container->get('templating')->renderResponse(
