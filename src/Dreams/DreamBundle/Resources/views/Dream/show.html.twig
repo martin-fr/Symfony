@@ -1,1 +1,99 @@
-Voici la page listant les rêves !
+{% extends "DreamsDreamBundle::base.html.twig" %}
+
+{% block title %} Liste des rêves {% endblock %}
+
+{% block content %}
+
+    <h2>Liste des derniers <span class="text-danger">rêves</span>.</h2><br />
+
+    {% for dream in dreams %}
+        {% if dream.category == 'Rêve' %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ dream.title }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ dream.description }}
+                        </div>
+                        <div class="panel-footer">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <span class="text-primary">
+                                            <small><strong>Catégorie :</strong> Rêve</small>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-success">
+                                            <small><strong>Auteur :</strong> Anonyme</small>
+                                        </span>
+                                    </td>
+                                    <td width="35%">
+                                        <span class="text-warning">
+                                            <small>
+                                                <strong>Créé le</strong>
+                                                {{ dream.dateCreation|date('d/m/Y') }}
+                                                <strong>à</strong>
+                                                {{ dream.dateCreation|date('H:i')|replace({':': 'h' }) }}
+                                            </small>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ dream.title }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            {{ dream.description }}
+                        </div>
+                        <div class="panel-footer">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <span class="text-primary">
+                                            <small><strong>Catégorie :</strong> Cauchemar</small>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-success">
+                                            <small><strong>Auteur :</strong> Anonyme</small>
+                                        </span>
+                                    </td>
+                                    <td width="35%">
+                                        <span class="text-warning">
+                                            <small>
+                                                <strong>Créé le</strong>
+                                                {{ dream.dateCreation|date('d/m/Y') }}
+                                                <strong>à</strong>
+                                                {{ dream.dateCreation|date('H:i')|replace({':': 'h' }) }}
+                                            </small>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="well well-lg">
+                    Il n'y a aucun rêve pour le moment.
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -18,8 +18,15 @@ class DreamController extends ContainerAware {
 
     public function showAction()
     {
+        $em = $this->container->get('doctrine')->getEntityManager();
+
+        $dreams = $em->getRepository('DreamsDreamBundle:Dream')->findAll();
+
         return $this->container->get('templating')->renderResponse(
-            'DreamsDreamBundle:Dream:show.html.twig');
+            'DreamsDreamBundle:Dream:show.html.twig',
+            array(
+                'dreams' => $dreams
+            ));
     }
 
     public function createAction()
@@ -34,11 +41,7 @@ class DreamController extends ContainerAware {
         if ($request->getMethod() == 'POST')
         {
             $form->bind($request);
-/*
-            echo "<pre>";
-            echo print_r($form->getErrors());
-            echo "</pre>";exit;
-*/
+
             if ($form->isValid())
             {
                 $em = $this->container->get('doctrine')->getEntityManager();
