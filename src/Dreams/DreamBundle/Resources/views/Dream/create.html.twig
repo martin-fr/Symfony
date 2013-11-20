@@ -9,7 +9,7 @@
     {% if message %}
         {% if error == 0 %}
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="alert alert-dismissable alert-success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         {{ message }}
@@ -18,7 +18,7 @@
             </div>
         {% else %}
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="alert alert-dismissable alert-danger">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         {{ message }}
@@ -29,7 +29,7 @@
     {% endif %}
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="well">
                 <form class="bs-example form-horizontal" action="{{ path('dreams_dream_create') }}" method="post" {{ form_enctype(form) }}>
                     <fieldset>
@@ -55,7 +55,7 @@
                         </div>
                         {{ form_widget(form._token) }}
                         <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-4">
+                            <div class="col-lg-10 col-lg-offset-4-5">
                                 <button class="btn btn-default">Annuler</button>
                                 <button type="submit" class="btn btn-primary">Ajouter</button>
                             </div>
@@ -66,8 +66,12 @@
         </div>
     </div>
 
-    <ul class="pager">
-        <li><a href="{{ path('dreams_dream_show') }}">Retour à la liste des rêves</a></li>
-    </ul>
+    <div class="row">
+        <div class="col-lg-8">
+            <ul class="pager">
+                <li><a href="{{ path('dreams_dream_show') }}">Retour à la liste des rêves</a></li>
+            </ul>
+        </div>
+    </div>
 
 {% endblock %}

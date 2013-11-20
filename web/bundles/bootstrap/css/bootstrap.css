@@ -1681,6 +1681,11 @@ pre code {
     .col-lg-offset-5 {
         margin-left: 41.66666666666667%;
     }
+
+    .col-lg-offset-4-5 {
+        margin-left: 37.66666666666667%;
+    }
+
     .col-lg-offset-4 {
         margin-left: 33.33333333333333%;
     }
