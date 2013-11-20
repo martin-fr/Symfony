@@ -7,49 +7,14 @@
     <h2>Liste des derniers <span class="text-danger">rêves</span>.</h2><br />
 
     {% for dream in dreams %}
-        {% if dream.category == 'Rêve' %}
-            <div class="row">
-                <div class="col-lg-6">
+
+        <div class="row">
+            <div class="col-lg-6">
+                {% if dream.category == 'Rêve' %}
                     <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{ dream.title }}</h3>
-                        </div>
-                        <div class="panel-body">
-                            {{ dream.description }}
-                        </div>
-                        <div class="panel-footer">
-                            <table width="100%">
-                                <tr>
-                                    <td>
-                                        <span class="text-primary">
-                                            <small><strong>Catégorie :</strong> Rêve</small>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="text-success">
-                                            <small><strong>Auteur :</strong> Anonyme</small>
-                                        </span>
-                                    </td>
-                                    <td width="35%">
-                                        <span class="text-warning">
-                                            <small>
-                                                <strong>Créé le</strong>
-                                                {{ dream.dateCreation|date('d/m/Y') }}
-                                                <strong>à</strong>
-                                                {{ dream.dateCreation|date('H:i')|replace({':': 'h' }) }}
-                                            </small>
-                                        </span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% else %}
-            <div class="row">
-                <div class="col-lg-6">
+                {% else %}
                     <div class="panel panel-danger">
+                {% endif %}
                         <div class="panel-heading">
                             <h3 class="panel-title">{{ dream.title }}</h3>
                         </div>
@@ -61,7 +26,11 @@
                                 <tr>
                                     <td>
                                         <span class="text-primary">
-                                            <small><strong>Catégorie :</strong> Cauchemar</small>
+                                            {% if dream.category == 'Rêve' %}
+                                            <small><strong>Catégorie :</strong> Rêve</small>
+                                            {% else %}
+                                                <small><strong>Catégorie :</strong> Cauchemar</small>
+                                            {% endif %}
                                         </span>
                                     </td>
                                     <td>
@@ -69,6 +38,13 @@
                                             <small><strong>Auteur :</strong> Anonyme</small>
                                         </span>
                                     </td>
+                                    <td>
+                                        <small>
+                                            <a href="">Commentaires <span class="badge">{{ random(50) }}</span></a>
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td width="35%">
                                         <span class="text-warning">
                                             <small>
@@ -83,12 +59,11 @@
                             </table>
                         </div>
                     </div>
-                </div>
             </div>
-        {% endif %}
+        </div>
     {% else %}
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="well well-lg">
                     Il n'y a aucun rêve pour le moment.
                 </div>
