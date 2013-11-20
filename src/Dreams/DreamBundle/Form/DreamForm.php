@@ -25,7 +25,7 @@ class DreamForm extends AbstractType {
                     'id' => 'description', 'maxlength' => 500), 'label_attr' => array('class' => 'col-lg-2 control-label')))
             ->add('category', 'choice', array('label' => 'Catégorie',
                 'attr'=> array('class' => 'form-control', 'id' => 'category'), 'label_attr' => array('class' => 'col-lg-2 control-label'),
-                'choices' => array('R'=>'Rêve', 'C'=>'Cauchemar')))
+                'choices' => array('Rêve'=>'Rêve', 'Cauchemar'=>'Cauchemar')))
         ;
     }
 

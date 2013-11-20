@@ -65,6 +65,7 @@ class Dream {
     {
         $this->dateCreation = new \DateTime('now');
         $this->dateModification = new \DateTime('now');
+        $this->note = 0;
     }
 
     /**

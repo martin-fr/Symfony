@@ -24,14 +24,36 @@ class DreamController extends ContainerAware {
 
     public function createAction()
     {
+        $error = 0;
+        $message = '';
         $dream = new Dream();
         $form = $this->container->get('form.factory')->create(new DreamForm(), $dream);
+
+        $request = $this->container->get('request');
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->bind($request);
+
+            //if ($form->isValid())
+            //{
+                $em = $this->container->get('doctrine')->getEntityManager();
+                $em->persist($dream);
+                $em->flush();
+                $message = 'Rêve ajouté avec succès ! :-)';
+            /*}
+            else {
+                $message = 'L\'ajout de votre rêve a échoué ! :-(';
+                $error = 1;
+            }*/
+        }
 
         return $this->container->get('templating')->renderResponse(
             'DreamsDreamBundle:Dream:create.html.twig',
             array(
                 'form' => $form->createView(),
-                'message' => ''
+                'message' => $message,
+                'error' => $error
             ));
     }
 

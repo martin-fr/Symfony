@@ -4,19 +4,36 @@
 
 {% block content %}
 
-    <h2>Ajouter un rêve</h2><br />
+    <h2>Ajouter un <span class="text-danger">rêve</span>.</h2><br />
 
     {% if message %}
-        <p>{{ message }}</p>
+        {% if error == 0 %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
-
 
     <div class="row">
         <div class="col-lg-6">
             <div class="well">
-                <form class="bs-example form-horizontal">
+                <form class="bs-example form-horizontal" action="{{ path('dreams_dream_create') }}" method="post" {{ form_enctype(form) }}>
                     <fieldset>
-                        <legend>Ajout d'un rêve</legend>
+                        <legend>Quel rêve avez-vous fait cette nuit ?</legend>
                         <div class="form-group">
                             {{ form_label(form.title) }}
                             <div class="col-lg-10">
