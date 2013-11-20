@@ -47,13 +47,13 @@ a {
     background: transparent;
 }
 
-a:focus {
-    outline: thin dotted;
-}
-
 a:active,
 a:hover {
-    outline: 0;
+    outline: none;
+}
+
+:focus {
+    -moz-outline-style: none;
 }
 
 h1 {
@@ -325,13 +325,13 @@ a:focus {
     color: #3399f3;
     text-decoration: underline;
 }
-
+/*
 a:focus {
     outline: thin dotted #333;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
 }
-
+*/
 img {
     vertical-align: middle;
 }
