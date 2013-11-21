@@ -30,7 +30,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    bundles: [ "FOSCommentBundle" ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -69,3 +69,12 @@ fos_user:
     db_driver:     orm
     firewall_name: main
     user_class:    Dreams\UserBundle\Entity\User
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: Dreams\CommentBundle\Entity\Comment
+            thread: Dreams\CommentBundle\Entity\Thread
+
+assetic:
