@@ -1,10 +1,10 @@
 dreams_user:
     resource: "@DreamsUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /user
 
 dreams_dream:
     resource: "@DreamsDreamBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /dream
 
 dreams_comment:
     resource: "@DreamsCommentBundle/Resources/config/routing.yml"
