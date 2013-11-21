@@ -1,3 +1,7 @@
 dreams_comment_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: DreamsCommentBundle:Default:index }
+
+dreams_comment_show:
+  pattern: /show
+  defaults: { _controller: DreamsCommentBundle:Comment:show }

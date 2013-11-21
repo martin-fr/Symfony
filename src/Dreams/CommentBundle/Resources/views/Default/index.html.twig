@@ -1,2 +1,7 @@
 Hello {{ name }}!
 {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'foo'} %}
+
+<!-- CSS -->
+{% stylesheets '@FOSCommentBundle/Resources/assets/css/comments.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}

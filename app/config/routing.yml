@@ -8,7 +8,7 @@ dreams_dream:
 
 dreams_comment:
     resource: "@DreamsCommentBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /comment
 
 my_app_filmotheque:
     resource: "@MyAppFilmothequeBundle/Resources/config/routing.yml"

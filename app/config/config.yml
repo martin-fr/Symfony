@@ -76,5 +76,3 @@ fos_comment:
         model:
             comment: Dreams\CommentBundle\Entity\Comment
             thread: Dreams\CommentBundle\Entity\Thread
-
-assetic:
