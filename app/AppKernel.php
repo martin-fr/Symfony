@@ -21,10 +21,9 @@ class AppKernel extends Kernel
             new Dreams\DreamBundle\DreamsDreamBundle(),
             new Dreams\UserBundle\DreamsUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-            new Craue\FormFlowBundle\CraueFormFlowBundle()
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\CommentBundle\FOSCommentBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

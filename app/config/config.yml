@@ -69,7 +69,3 @@ fos_user:
     db_driver:     orm
     firewall_name: main
     user_class:    Dreams\UserBundle\Entity\User
-
-mopa_bootstrap:
-    form: ~  # Adds twig form theme  support
-    menu: ~  # enables twig helpers for menu
