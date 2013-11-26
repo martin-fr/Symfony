@@ -6,8 +6,8 @@
 
         <title>{% block title %}{% endblock %}</title>
 
-        <link href=" {{asset('bundles/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
-        <link href=" {{asset('bundles/bootstrap/css/bootswatch.min.css')}}" rel="stylesheet">
+        <link href=" {{asset('bundles/bootstrap/css/bootstrap.css')}}" rel="stylesheet" type="text/css" />
+        <link href=" {{asset('bundles/bootstrap/css/bootswatch.min.css')}}" rel="stylesheet" type="text/css" />
     </head>
     <body>
 
@@ -43,22 +43,53 @@
                     <li>
                         <a href="{{ path('dreams_dream_create') }}">Proposer un rêve ?</a>
                     </li>
-                    <li>
-                        <a href="#">Nous contacter</a>
-                    </li>
                 </ul>
                 <!-- Champ de recherche -->
                 <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control col-lg-8" placeholder="Rechercher...">
+                    <input type="text" class="form-control col-lg-8" placeholder="Rechercher..." />
                 </form>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div id="content">
-            {% block content %}{% endblock %}
+        <div class="row">
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <div class="col-lg-3 sidemenu">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <img src="{{ asset('bundles/dreamsdream/images/glyphicon_user.png') }}" width="18px" style="margin-right: 5%;" />
+                                {{ app.user.username }}
+                                (<a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>)
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            Bienvenue !
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-lg-3 sidemenu">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <img src="{{ asset('bundles/dreamsdream/images/glyphicon_user.png') }}" width="18px" style="margin-right: 5%;" />
+                                Connexion
+                            </h2>
+                        </div>
+                        <div class="panel-body">
+                            <a href="{{ path('fos_user_security_login') }}">Identifiez-vous !</a><br /><br />
+                            <a href="">Pas encore inscrit ?</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
+
 
     <footer>
         <p>Ici se trouve le footer.</p>

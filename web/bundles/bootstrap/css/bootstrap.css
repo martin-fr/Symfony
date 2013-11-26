@@ -6147,7 +6147,7 @@ a.list-group-item.active:focus .list-group-item-text {
 
 .panel-default > .panel-heading {
     color: #333333;
-    background-color: #f5f5f5;
+    background-color: #E6E6E6;
     border-color: #dddddd;
 }
 
@@ -7684,4 +7684,38 @@ td.visible-print {
 
 .affix {
     position: fixed;
+}
+
+/* Modifications Martin */
+
+.sidemenu {
+    position: absolute;
+    top: 21%;
+    left: 70%;
+}
+
+.form-signin {
+    max-width: 300px;
+    padding: 19px 29px 29px;
+    margin: 0 auto 20px;
+    background-color: #fff;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {
+    font-size: 16px;
+    height: auto;
+    margin-bottom: 15px;
+    padding: 7px 9px;
+}
+
+.logo {
+    margin-bottom:1em;
+}
+
+.forgot {
+    margin: 20px;
 }
