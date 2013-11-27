@@ -1,2 +1,6 @@
 {% extends "DreamsCommentBundle::base.html.twig" %}
 {% block title %} Ajouter un comm {% endblock %}
+
+{% block content %}
+    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'foo'} %}
+{% endblock %}
