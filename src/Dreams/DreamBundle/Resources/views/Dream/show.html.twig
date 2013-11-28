@@ -35,7 +35,13 @@
                                     </td>
                                     <td width="30%">
                                         <span class="text-success">
-                                            <small><strong>Auteur :</strong> Anonyme</small>
+                                            <small>
+                                                {% if dream.user %}
+                                                    <strong>Auteur :</strong> {{ dream.user.username }}
+                                                {% else %}
+                                                    <strong>Auteur :</strong> Anonyme
+                                                {% endif %}
+                                            </small>
                                         </span>
                                     </td>
                                     <td width="25%">

@@ -34,6 +34,7 @@ class DreamController extends ContainerAware {
         $error = 0;
         $message = '';
         $dream = new Dream();
+
         $form = $this->container->get('form.factory')->create(new DreamForm(), $dream);
 
         $request = $this->container->get('request');
@@ -42,8 +43,13 @@ class DreamController extends ContainerAware {
         {
             $form->bind($request);
 
+            $userManager = $this->container->get('fos_user.user_manager');
+            $user = $userManager->findUserByUsername($this->container->get('security.context')->getToken()->getUser());
+
             if ($form->isValid())
             {
+                $dream->setUser($user);
+
                 $em = $this->container->get('doctrine')->getEntityManager();
                 $em->persist($dream);
                 $em->flush();

@@ -54,10 +54,10 @@ class User extends BaseUser {
     /**
      * Add dreams
      *
-     * @param \Dreams\UserBundle\Entity\Dream $dreams
-     * @return User
+     * @param \Dreams\DreamBundle\Entity\Dream $dreams
+     * @return Dream
      */
-    public function addDream(\Dreams\UserBundle\Entity\Dream $dreams)
+    public function addDream(\Dreams\DreamBundle\Entity\Dream $dreams)
     {
         $this->dreams[] = $dreams;
     
@@ -67,9 +67,9 @@ class User extends BaseUser {
     /**
      * Remove dreams
      *
-     * @param \Dreams\UserBundle\Entity\Dream $dreams
+     * @param \Dreams\DreamBundle\Entity\Dream $dreams
      */
-    public function removeDream(\Dreams\UserBundle\Entity\Dream $dreams)
+    public function removeDream(\Dreams\DreamBundle\Entity\Dream $dreams)
     {
         $this->dreams->removeElement($dreams);
     }

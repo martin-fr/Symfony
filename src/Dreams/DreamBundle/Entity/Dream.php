@@ -221,10 +221,10 @@ class Dream {
     /**
      * Set user
      *
-     * @param \Dreams\DreamBundle\Entity\User $user
-     * @return Dream
+     * @param \Dreams\UserBundle\Entity\User $user
+     * @return User
      */
-    public function setUser(\Dreams\DreamBundle\Entity\User $user = null)
+    public function setUser(\Dreams\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
     
@@ -234,7 +234,7 @@ class Dream {
     /**
      * Get user
      *
-     * @return \Dreams\DreamBundle\Entity\User 
+     * @return \Dreams\UserBundle\Entity\User
      */
     public function getUser()
     {
