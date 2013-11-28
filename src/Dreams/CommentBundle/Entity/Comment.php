@@ -6,10 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\CommentBundle\Entity\Comment as BaseComment;
 
 /**
- * @ORM\Entity
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+ * Dreams\CommentBundle\Entity\Comment
+ * @ORM\Entity(repositoryClass="Dreams\CommentBundle\Entity\CommentRepository")
+ * @ORM\Table(name="comments")
  */
-class Comment extends BaseComment
+class Comment
 {
     /**
      * @ORM\Id
@@ -17,12 +18,39 @@ class Comment extends BaseComment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     */
+    private $description;
 
     /**
-     * Thread of this comment
-     *
-     * @var Thread
-     * @ORM\ManyToOne(targetEntity="Dreams\CommentBundle\Entity\Thread")
+     * @ORM\Column(type="datetime")
      */
-    protected $thread;
+    private $dateCreate;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateUpdate;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $note;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $answerTo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dreams\DreamBundle\Entity\Dream")
+     */
+    private $dream;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dreams\UserBundle\Entity\User")
+     */
+    private $user;
 }
