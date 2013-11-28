@@ -46,12 +46,12 @@ class Dream {
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateCreation;
+    private $dateCreate;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateModification;
+    private $dateUpdate;
 
     /**
      * @ORM\Column(type="string",length=50)
@@ -65,8 +65,8 @@ class Dream {
 
     public function __construct()
     {
-        $this->dateCreation = new \DateTime('now');
-        $this->dateModification = new \DateTime('now');
+        $this->dateCreate = new \DateTime('now');
+        $this->dateUpdate = new \DateTime('now');
         $this->note = 0;
     }
 
@@ -155,9 +155,9 @@ class Dream {
      * @param \DateTime $dateCreation
      * @return Dream
      */
-    public function setDateCreation($dateCreation)
+    public function setDateCreate($dateCreate)
     {
-        $this->dateCreation = $dateCreation;
+        $this->dateCreate = $dateCreate;
     
         return $this;
     }
@@ -167,9 +167,9 @@ class Dream {
      *
      * @return \DateTime 
      */
-    public function getDateCreation()
+    public function getDateCreate()
     {
-        return $this->dateCreation;
+        return $this->dateCreate;
     }
 
     /**
@@ -178,9 +178,9 @@ class Dream {
      * @param \DateTime $dateModification
      * @return Dream
      */
-    public function setDateModification($dateModification)
+    public function setDateUpdate($dateUpdate)
     {
-        $this->dateModification = $dateModification;
+        $this->dateUpdate = $dateUpdate;
     
         return $this;
     }
@@ -190,9 +190,9 @@ class Dream {
      *
      * @return \DateTime 
      */
-    public function getDateModification()
+    public function getDateUpdate()
     {
-        return $this->dateModification;
+        return $this->dateUpdate;
     }
 
     /**
