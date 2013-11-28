@@ -20,9 +20,7 @@
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "symfony/icu": "1.0.*@dev",
-        "friendsofsymfony/comment-bundle": "dev-master",
-        "ornicar/akismet-bundle": "dev-master"
+        "symfony/icu": "1.0.*@dev"
     },
     "scripts": {
         "post-install-cmd": [

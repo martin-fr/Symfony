@@ -10,10 +10,6 @@ dreams_comment:
     resource: "@DreamsCommentBundle/Resources/config/routing.yml"
     prefix:   /comment
 
-my_app_filmotheque:
-    resource: "@MyAppFilmothequeBundle/Resources/config/routing.yml"
-    prefix:   /myapp
-
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
@@ -36,9 +32,3 @@ fos_user_change_password:
 fos_user_security_login:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /api
-    defaults: { _format: html }

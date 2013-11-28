@@ -8,6 +8,8 @@
 
 namespace Dreams\CommentBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Dreams\CommentBundle\Entity\VoteComment
  * @ORM\Entity(repositoryClass="Dreams\CommentBundle\Entity\VoteCommentRepository")
@@ -31,4 +33,60 @@ class VoteComment
      * @ORM\ManyToOne(targetEntity="Dreams\UserBundle\Entity\User")
      */
     private $user;
-} 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param \Dreams\CommentBundle\Entity\Comment $comment
+     * @return VoteComment
+     */
+    public function setComment(\Dreams\CommentBundle\Entity\Comment $comment = null)
+    {
+        $this->comment = $comment;
+    
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return \Dreams\CommentBundle\Entity\Comment 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Dreams\UserBundle\Entity\User $user
+     * @return VoteComment
+     */
+    public function setUser(\Dreams\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Dreams\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

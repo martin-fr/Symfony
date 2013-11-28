@@ -1,3 +1,0 @@
-myapp_accueil:
-    pattern: /
-    defaults: { _controller: MyAppFilmothequeBundle:Default:index }

@@ -1,0 +1,36 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: tristanchanteloup
+ * Date: 28/11/2013
+ * Time: 14:40
+ */
+
+namespace Dreams\CommentBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Dreams\CommentBundle\Entity\VoteComment
+ * @ORM\Entity(repositoryClass="Dreams\CommentBundle\Entity\VoteCommentRepository")
+ * @ORM\Table(name="votes_comments")
+ */
+class VoteComment
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dreams\CommentBundle\Entity\Comment")
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Dreams\UserBundle\Entity\User")
+     */
+    private $user;
+} 

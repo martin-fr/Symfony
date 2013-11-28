@@ -36,4 +36,60 @@ class VoteDream {
      */
     private $user;
 
-} 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dream
+     *
+     * @param \Dreams\DreamBundle\Entity\Dream $dream
+     * @return VoteDream
+     */
+    public function setDream(\Dreams\DreamBundle\Entity\Dream $dream = null)
+    {
+        $this->dream = $dream;
+    
+        return $this;
+    }
+
+    /**
+     * Get dream
+     *
+     * @return \Dreams\DreamBundle\Entity\Dream 
+     */
+    public function getDream()
+    {
+        return $this->dream;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Dreams\UserBundle\Entity\User $user
+     * @return VoteDream
+     */
+    public function setUser(\Dreams\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Dreams\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

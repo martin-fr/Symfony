@@ -29,7 +29,7 @@ class User extends BaseUser {
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Dream", mappedBy="user", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="Dreams\DreamBundle\Entity\Dream", mappedBy="user", cascade={"persist", "remove", "merge"})
      */
     private $dreams;
 
@@ -41,4 +41,46 @@ class User extends BaseUser {
         $this->roles = array('ROLE_USER');
     }
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Add dreams
+     *
+     * @param \Dreams\UserBundle\Entity\Dream $dreams
+     * @return User
+     */
+    public function addDream(\Dreams\UserBundle\Entity\Dream $dreams)
+    {
+        $this->dreams[] = $dreams;
+    
+        return $this;
+    }
+
+    /**
+     * Remove dreams
+     *
+     * @param \Dreams\UserBundle\Entity\Dream $dreams
+     */
+    public function removeDream(\Dreams\UserBundle\Entity\Dream $dreams)
+    {
+        $this->dreams->removeElement($dreams);
+    }
+
+    /**
+     * Get dreams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDreams()
+    {
+        return $this->dreams;
+    }
 }
