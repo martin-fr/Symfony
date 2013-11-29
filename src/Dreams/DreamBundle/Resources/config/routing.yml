@@ -6,6 +6,10 @@ dreams_dream_create:
   pattern: /create
   defaults: { _controller: DreamsDreamBundle:Dream:create }
 
+dreams_dream_mylist:
+  pattern: /mylist
+  defaults: { _controller: DreamsDreamBundle:Dream:mylist }
+
 dreams_dream_edit:
   pattern: /edit/{id}
   defaults: { _controller: DreamsDreamBundle:Dream:edit }

@@ -3,6 +3,7 @@
 namespace Dreams\DreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Dreams\UserBundle\Entity\User;
 
 /**
  * DreamRepository
@@ -11,5 +12,34 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class DreamRepository extends EntityRepository {
+
+    // DreamRepository facilite l'acces aux objets Dream recuperes depuis la BDD
+
+    public function createDream(Dream $dream, User $user) {
+
+        $dream->setUser($user); // on affecte le user au reve passe en parametre
+
+        // on ajoute le reve en BDD
+        $em = $this->getEntityManager();
+        $em->persist($dream);
+        $em->flush();
+    }
+
+    public function getUserDreams(User $user) {
+
+        $em = $this->getEntityManager();
+
+        // on recupere tous les reves dont le user est celui passe en parametre, trie par dateCreate les plus recentes
+        $qb = $em->createQueryBuilder();
+        $qb->select('d')
+            ->from('DreamsDreamBundle:Dream', 'd')
+            ->where('d.user = :user')
+            ->setParameter('user',$user)
+            ->orderBy('d.dateCreate', 'DESC');
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 
 }
