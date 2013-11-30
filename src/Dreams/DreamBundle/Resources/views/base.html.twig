@@ -10,6 +10,7 @@
         <link href=" {{asset('bundles/bootstrap/css/bootswatch.min.css')}}" rel="stylesheet" type="text/css" />
 
         <script src="{{asset('bundles/bootstrap/js/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/bootstrap/js/jquery.highlight-4.js')}}"></script>
         <script src="{{asset('bundles/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('bundles/bootstrap/js/bootswatch.js')}}"></script>
 
@@ -51,8 +52,8 @@
                     </li>
                 </ul>
                 <!-- Champ de recherche -->
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control col-lg-8" placeholder="Rechercher..." />
+                <form class="navbar-form navbar-right" action="{{ path('dreams_dream_search') }}" method="get">
+                    <input type="text" class="form-control col-lg-8" placeholder="Rechercher..." id="search" name="search" />
                 </form>
             </div>
         </div>

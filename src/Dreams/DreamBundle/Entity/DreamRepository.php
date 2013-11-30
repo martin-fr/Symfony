@@ -47,6 +47,30 @@ class DreamRepository extends EntityRepository {
         $em->flush();
     }
 
+    public function searchDreams($search) {
+
+        // separation des mots cles s'il y en a plusieurs pour les tester individuellement
+        $keyWords = explode(' ', $search);
+
+        $em = $this->getEntityManager();
+
+        // on recupere tous les reves dont le titre ou la description correspond aux mots cles
+        $qb = $em->createQueryBuilder();
+        $qb->select('d')
+            ->from('DreamsDreamBundle:Dream', 'd');
+        foreach ($keyWords as $keyWord) {
+            $qb->orWhere("d.title LIKE :keyWord")
+                ->setParameter('keyWord','%'.$keyWord.'%');
+            $qb->orWhere("d.description LIKE :keyWord")
+                ->setParameter('keyWord','%'.$keyWord.'%');
+        }
+        $qb->orderBy('d.dateCreate', 'DESC');
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
     public function getUserDreams(User $user) {
 
         $em = $this->getEntityManager();

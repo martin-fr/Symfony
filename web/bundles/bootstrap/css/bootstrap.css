@@ -7721,3 +7721,7 @@ td.visible-print {
 .forgot {
     margin: 20px;
 }
+
+.highlight {
+    background-color: #FFFF88;
+}

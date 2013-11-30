@@ -1,0 +1,96 @@
+{% extends "DreamsDreamBundle::base.html.twig" %}
+
+{% block title %} Recherche de rêves {% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var keyWords = {{ search|json_encode|raw }}.split(" ");
+            keyWords.forEach(function(keyWord) {
+                $('body').highlight(keyWord);
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <h2>Résultat de la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+
+    {% for dream in dreams %}
+
+        <div class="row">
+        <div class="col-lg-8">
+            {% if dream.category == 'Rêve' %}
+            <div class="panel panel-info">
+                {% else %}
+                <div class="panel panel-danger">
+                    {% endif %}
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ dream.title }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        {{ dream.description }}
+                    </div>
+                    <div class="panel-footer">
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                        <span class="text-primary">
+                                            {% if dream.category == 'Rêve' %}
+                                                <small><strong>Catégorie :</strong> Rêve</small>
+                                            {% else %}
+                                                <small><strong>Catégorie :</strong> Cauchemar</small>
+                                            {% endif %}
+                                        </span>
+                                </td>
+                                <td width="30%">
+                                        <span class="text-success">
+                                            <small>
+                                                {% if dream.user %}
+                                                    <strong>Auteur :</strong> {{ dream.user.username }}
+                                                {% else %}
+                                                    <strong>Auteur :</strong> Anonyme
+                                                {% endif %}
+                                            </small>
+                                        </span>
+                                </td>
+                                <td width="25%">
+                                    <small>
+                                        <a href="">Commentaires <span class="badge">{{ random(50) }}</span></a>
+                                    </small>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="35%">
+                                        <span class="text-warning">
+                                            <small>
+                                                <strong>Créé le</strong>
+                                                {{ dream.dateCreate|date('d/m/Y') }}
+                                                <strong>à</strong>
+                                                {{ dream.dateCreate|date('H:i')|replace({':': 'h' }) }}
+                                            </small>
+                                        </span>
+                                </td>
+                                <td>
+                                        <span class="text-warning">
+
+                                        </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="well well-lg">
+                    La recherche n'a donné aucun résultat.
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

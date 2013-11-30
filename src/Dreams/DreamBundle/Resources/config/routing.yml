@@ -18,3 +18,6 @@ dreams_dream_delete:
   pattern: /delete/{id}
   defaults: { _controller: DreamsDreamBundle:Dream:delete }
 
+dreams_dream_search:
+  pattern: /search/
+  defaults: { _controller: DreamsDreamBundle:Dream:search }
