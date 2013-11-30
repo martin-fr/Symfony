@@ -15,7 +15,7 @@ class DreamRepository extends EntityRepository {
 
     // DreamRepository facilite l'acces aux objets Dream recuperes depuis la BDD
 
-    public function createDream(Dream $dream, User $user) {
+    public function createDream(Dream $dream, User $user = null) {
 
         $dream->setUser($user); // on affecte le user au reve passe en parametre
 

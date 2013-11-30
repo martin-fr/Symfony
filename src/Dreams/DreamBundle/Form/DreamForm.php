@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class DreamForm extends AbstractType {
 
-    public function buildForm(FormBuilderInterface  $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', 'text', array('label' => 'Titre', 'max_length' => 50,
