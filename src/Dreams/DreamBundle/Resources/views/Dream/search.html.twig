@@ -7,7 +7,8 @@
         $(document).ready(function(){
             var keyWords = {{ search|json_encode|raw }}.split(" ");
             keyWords.forEach(function(keyWord) {
-                $('body').highlight(keyWord);
+                $('#content .panel-heading').highlight(keyWord);
+                $('#content .panel-body').highlight(keyWord);
             });
         });
     </script>
@@ -15,7 +16,13 @@
 
 {% block content %}
 
-    <h2>Résultat de la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+    {% if dreams|length == 0 %}
+        <h2>Il n'y a aucun résultat pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+    {% elseif dreams|length == 1 %}
+        <h2>Il y a {{ dreams|length }} résultat pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+    {% else %}
+        <h2>Il y a {{ dreams|length }} résultats pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+    {% endif %}
 
     {% for dream in dreams %}
 
@@ -87,7 +94,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="well well-lg">
-                    La recherche n'a donné aucun résultat.
+                    Veuillez essayer d'autres mots-clés.
                 </div>
             </div>
         </div>
