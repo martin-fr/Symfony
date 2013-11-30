@@ -21,7 +21,29 @@ class DreamRepository extends EntityRepository {
 
         // on ajoute le reve en BDD
         $em = $this->getEntityManager();
+
         $em->persist($dream);
+        $em->flush();
+    }
+
+    public function editDream(Dream $dream) {
+
+        // on modifie la dateUpdate
+        $dream->setDateUpdate(new \DateTime('now'));
+
+        // on modifie le reve en BDD
+        $em = $this->getEntityManager();
+
+        $em->persist($dream);
+        $em->flush();
+    }
+
+    public function deleteDream(Dream $dream) {
+
+        // on supprime le reve en BDD
+        $em = $this->getEntityManager();
+
+        $em->remove($dream);
         $em->flush();
     }
 

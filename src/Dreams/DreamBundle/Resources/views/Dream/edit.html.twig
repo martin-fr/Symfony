@@ -1,1 +1,96 @@
-Voici la page de modification d'un rêve !
+{% extends "DreamsDreamBundle::base.html.twig" %}
+
+{% block title %} Modifier un rêve {% endblock %}
+
+{% block content %}
+
+    {% if error_security == 1 %}
+
+        <h2>Modification du <span class="text-danger">rêve</span> refusée.</h2><br />
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+
+    {% else %}
+
+        <h2>Modifier le <span class="text-danger">rêve</span> : {{ dream.title }}.</h2><br />
+
+        {% if message %}
+            {% if error == 0 %}
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="alert alert-dismissable alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="alert alert-dismissable alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="well">
+                    <form class="bs-example form-horizontal" action="{{ path('dreams_dream_edit', {'id': dream.id}) }}" method="post" {{ form_enctype(form) }}>
+                        <fieldset>
+                            <legend>Modifier les informations nécessaires.</legend>
+                            <div class="form-group">
+                                {{ form_label(form.title) }}
+                                <div class="col-lg-10">
+                                    {{ form_widget(form.title) }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.description) }}
+                                <div class="col-lg-10">
+                                    {{ form_widget(form.description) }}
+                                    <span class="help-block">La description du rêve ne doit pas dépasser 500 caractères.</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.category) }}
+                                <div class="col-lg-10">
+                                    {{ form_widget(form.category) }}
+                                </div>
+                            </div>
+                            {{ form_widget(form._token) }}
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-4-5">
+                                    <a href="{{ path('dreams_dream_mylist') }}">
+                                        <input type="button" class="btn btn-default" value="Annuler" />
+                                    </a>
+                                    <input type="submit" class="btn btn-primary" value="Modifier" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+        <div class="row">
+            <div class="col-lg-8">
+                <ul class="pager">
+                    <li><a href="{{ path('dreams_dream_mylist') }}">Retour à la liste de mes rêves</a></li>
+                </ul>
+            </div>
+        </div>
+
+{% endblock %}

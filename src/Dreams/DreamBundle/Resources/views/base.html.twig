@@ -8,6 +8,12 @@
 
         <link href=" {{asset('bundles/bootstrap/css/bootstrap.css')}}" rel="stylesheet" type="text/css" />
         <link href=" {{asset('bundles/bootstrap/css/bootswatch.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <script src="{{asset('bundles/bootstrap/js/jquery.min.js')}}"></script>
+        <script src="{{asset('bundles/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('bundles/bootstrap/js/bootswatch.js')}}"></script>
+
+        {% block javascripts %}{% endblock %}
     </head>
     <body>
 
@@ -96,8 +102,5 @@
 
     </div>
 
-    <script src="{{asset('bundles/bootstrap/js/jquery.min.js')}}"></script>
-    <script src="{{asset('bundles/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('bundles/bootstrap/js/bootswatch.js')}}"></script>
     </body>
 </html>

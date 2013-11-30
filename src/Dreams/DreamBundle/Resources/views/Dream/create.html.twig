@@ -56,8 +56,10 @@
                         {{ form_widget(form._token) }}
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-4-5">
-                                <button class="btn btn-default">Annuler</button>
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                                <a href="{{ path('dreams_dream_show') }}">
+                                    <input type="button" class="btn btn-default" value="Annuler" />
+                                </a>
+                                <input type="submit" class="btn btn-primary" value="Ajouter" />
                             </div>
                         </div>
                     </fieldset>
