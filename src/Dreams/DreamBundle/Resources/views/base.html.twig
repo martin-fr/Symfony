@@ -64,7 +64,7 @@
             <div id="content">
                 {% block content %}{% endblock %}
             </div>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if (is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED')) %}
                 <div class="col-lg-3 sidemenu">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -90,7 +90,7 @@
                         </div>
                         <div class="panel-body">
                             <a href="{{ path('fos_user_security_login') }}">Identifiez-vous !</a><br /><br />
-                            <a href="">Pas encore inscrit ?</a>
+                            <a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a>
                         </div>
                     </div>
                 </div>

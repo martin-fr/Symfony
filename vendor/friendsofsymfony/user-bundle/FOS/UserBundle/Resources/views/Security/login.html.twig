@@ -8,14 +8,37 @@
     {% endif %}
 
     <div class="container">
-        <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+        <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin" style="text-align:center">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-            <h2 class="form-signin-heading">Connexion</h2>
-            <input type="text" class="input-block-level" id="username" name="_username" value="{{ last_username }}" placeholder="Identifiant" required="required" />
-            <input type="password" class="input-block-level" id="password" name="_password" placeholder="Mot de passe" required="required" />
+            <img src="{{ asset('bundles/dreamsdream/images/user_login.png') }}" width="96" style="margin-bottom: 10%;border-radius: 50%;"/>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <img src="{{ asset('bundles/dreamsdream/images/user_login_id.png') }}" height="20" />
+                </span>
+                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Identifiant" required="required" />
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <img src="{{ asset('bundles/dreamsdream/images/user_login_password.png') }}" height="20" />
+                </span>
+                <input class="form-control" type="password" id="password" name="_password" placeholder="Mot de passe" required="required" />
+            </div>
 
             <input type="submit" class="btn btn-large btn-primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+            <div class="form-group">
+                <input type="checkbox" id="remember_me" name="_remember_me" class="remember-me" checked />
+                <label for="remember_me" class="remember-me-text">Rester connecté</label>
+
+                <a href="{{ path('fos_user_registration_register') }}" class="create-account">Créer un compte</a>
+            </div>
+            <br />
+            <div class="form-group">
+                <a href="{{ path('fos_user_resetting_request') }}" class="change-password">Mot de passe oublié ?</a>
+            </div>
         </form>
     </div>
 
