@@ -11,10 +11,10 @@
             <img src="{{ asset('bundles/dreamsdream/images/user_login.png') }}" width="96" class="user_login" />
 
             {% if error %}
-            <div class="alert alert-dismissable alert-danger">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                {{ error|trans }}.
-            </div>
+                <div class="alert alert-dismissable alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{ error|trans }}.
+                </div>
             {% endif %}
 
             <div class="input-group">
@@ -38,12 +38,17 @@
                 <label for="remember_me" class="remember-me-text">Rester connecté</label>
 
                 <a href="{{ path('fos_user_resetting_request') }}" class="change-password">Mot de passe oublié ?</a>
-            </div>
+            </div><!--
             <br />
+            <!--
             <div class="form-group">
                 <a href="{{ path('fos_user_registration_register') }}" class="create-account">Créer un compte</a>
-            </div>
+            </div>-->
         </form>
+        <br />
+        <ul class="pager">
+            <li><a href="{{ path('dreams_dream_show') }}">Retour au site</a></li>
+        </ul>
     </div>
 
 {% endblock fos_user_content %}
