@@ -7697,7 +7697,7 @@ td.visible-print {
 }
 
 .form-signin {
-    max-width: 400px;
+    max-width: 415px;
     padding: 19px 29px 29px;
     margin: 0 auto 20px;
     background-color: #fff;
@@ -7738,6 +7738,11 @@ td.visible-print {
 
 .form-signin .create-account {
     margin-right: 9%;
+}
+
+.form-signin .user_login {
+    margin-bottom: 10%;
+    border-radius: 50%;
 }
 
 .logo {
