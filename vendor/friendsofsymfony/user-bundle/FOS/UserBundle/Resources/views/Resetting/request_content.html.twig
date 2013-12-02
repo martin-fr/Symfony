@@ -1,14 +1,34 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <div>
+<div class="container">
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="form-signin" style="text-align:center">
+
+        <img src="{{ asset('bundles/dreamsdream/images/user_login_password.png') }}" width="96" style="margin-bottom: 10%;" />
+
         {% if invalid_username is defined %}
-            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+            </div>
+        {% elseif email is defined %}
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ 'registration.check_email'|trans({'%email%': email}) }}
+            </div>
+        {% elseif passwordAlreadyRequested is defined %}
+            <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ 'resetting.password_already_requested'|trans }}
+            </div>
         {% endif %}
+
         <label for="username">{{ 'resetting.request.username'|trans }}</label>
-        <input type="text" id="username" name="username" required="required" />
-    </div>
-    <div>
-        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" />
-    </div>
-</form>
+        <input class="form-control" type="text" id="username" name="username" required="required" />
+        <br />
+        <input type="submit" class="btn btn-large btn-primary" value="{{ 'resetting.request.submit'|trans }}" />
+    </form>
+    <br />
+    <ul class="pager">
+        <li><a href="{{ path('dreams_dream_show') }}">Retour au site</a></li>
+    </ul>
+</div>
