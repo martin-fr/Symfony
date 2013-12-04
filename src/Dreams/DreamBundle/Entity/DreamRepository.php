@@ -47,6 +47,30 @@ class DreamRepository extends EntityRepository {
         $em->flush();
     }
 
+    public function editNoteDream(Dream $dream, $vote) {
+
+        $em = $this->getEntityManager();
+
+        // si le reve n'a pas encore de note on lui attribue le montant du vote comme note
+        if ($dream->getNote() == 0) {
+            $dream->setNote($vote);
+        }
+        else {
+            // recuperation du nombre de votes du reve
+            $nbVoteDream = $em->getRepository('DreamsDreamBundle:VoteDream')->getNbVoteDream($dream);
+            // recuperation du montant total des votes du reve
+            $totalVoteDream = $em->getRepository('DreamsDreamBundle:VoteDream')->getTotalVoteDream($dream);
+
+            // actualisation de la note
+            $dream->setNote($totalVoteDream / $nbVoteDream);
+        }
+
+        // on modifie le reve en BDD pour que la note soit actualisee
+
+        $em->persist($dream);
+        $em->flush();
+    }
+
     public function searchDreams($search) {
 
         // separation des mots cles s'il y en a plusieurs pour les tester individuellement

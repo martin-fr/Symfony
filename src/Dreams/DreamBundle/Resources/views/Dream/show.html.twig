@@ -2,11 +2,44 @@
 
 {% block title %} Liste des rêves {% endblock %}
 
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function(){
+            $('.auto-submit-stars').rating({
+                callback: function(value){
+                    var id = this.form.elements['idDream'].value;
+                    var name = 'vote_id_'+id;
+
+                    //alert("Vous avez voté '" + value + "/5 pour le rêve " + id + ".");
+
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ path('dreams_dream_vote') }}",
+                        data:{'id':id, 'vote':value},
+                        cache: false,
+                        success: function(data)
+                        {
+                            $('#votes_infos_'+id).html(data);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown)
+                        {
+                            alert('Error : ' + errorThrown);
+                        }
+                    });
+
+                    $("input[name="+name+"]").rating('disable');
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 
     <h2>Liste des derniers <span class="text-danger">rêves</span>.</h2><br />
 
     {% for dream in dreams %}
+        {% set nbVotes = 0 %}
 
         <div class="row">
             <div class="col-lg-8">
@@ -25,13 +58,15 @@
                             <table width="100%">
                                 <tr>
                                     <td>
-                                        <span class="text-primary">
-                                            {% if dream.category == 'Rêve' %}
-                                            <small><strong>Catégorie :</strong> Rêve</small>
-                                            {% else %}
+                                        {% if dream.category == 'Rêve' %}
+                                            <span class="text-primary">
+                                                <small><strong>Catégorie :</strong> Rêve</small>
+                                            </span>
+                                        {% else %}
+                                            <span class="text-danger">
                                                 <small><strong>Catégorie :</strong> Cauchemar</small>
-                                            {% endif %}
-                                        </span>
+                                            </span>
+                                        {% endif %}
                                     </td>
                                     <td width="30%">
                                         <span class="text-success">
@@ -44,7 +79,7 @@
                                             </small>
                                         </span>
                                     </td>
-                                    <td width="25%">
+                                    <td width="20%">
                                         <small>
                                             <a href="">Commentaires <span class="badge">{{ random(50) }}</span></a>
                                         </small>
@@ -62,9 +97,62 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="text-warning">
+                                        {% if dream in dreamsVoted %}
+                                            {% set disabled = 'disabled="disabled"' %}
+                                        {% else %}
+                                            {% set disabled = '' %}
+                                        {% endif %}
 
-                                        </span>
+                                        {% set nbVotes = 0 %}
+                                        {% for voteDream in voteDreams %}
+                                            {% if voteDream.dream == dream %}
+                                                {% set nbVotes = nbVotes + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if nbVotes > 1 %}
+                                            {% set votes = 'votes' %}
+                                        {% else %}
+                                            {% set votes = 'vote' %}
+                                        {% endif %}
+                                        <form>
+                                            <input type="hidden" name="idDream" value="{{ dream.id }}" />
+                                            {% if (dream.note >= 0.5 and dream.note < 1.5) %}
+                                                <input class="auto-submit-stars required" type="radio" name="vote_id_{{ dream.id }}" value="1" checked {{ disabled }} />
+                                            {% else %}
+                                                <input class="auto-submit-stars required" type="radio" name="vote_id_{{ dream.id }}" value="1" {{ disabled }} />
+                                            {% endif %}
+                                            {% if (dream.note >= 1.5 and dream.note < 2.5) %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="2" checked {{ disabled }} />
+                                            {% else %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="2" {{ disabled }} />
+                                            {% endif %}
+                                            {% if (dream.note >= 2.5 and dream.note < 3.5) %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="3" checked {{ disabled }} />
+                                            {% else %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="3" {{ disabled }} />
+                                            {% endif %}
+                                            {% if (dream.note >= 3.5 and dream.note < 4.5) %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="4" checked {{ disabled }} />
+                                            {% else %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="4" {{ disabled }} />
+                                            {% endif %}
+                                            {% if (dream.note >= 4.5 and dream.note <= 5) %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="5" checked {{ disabled }} />
+                                            {% else %}
+                                                <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="5" {{ disabled }} />
+                                            {% endif %}
+                                        </form>
+                                        <div id="votes_infos_{{ dream.id }}">
+                                            {% if nbVotes >= 1 %}
+                                                <small style="margin-left: 3%;">
+                                                    (<strong>{{ dream.note|replace('.', ',') }}</strong>
+                                                    pour
+                                                    <strong>{{ nbVotes }}</strong>
+                                                    {{ votes }})
+                                                </small>
+                                            {% endif %}
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

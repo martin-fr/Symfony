@@ -28,6 +28,7 @@ class VoteDream {
 
     /**
      * @ORM\ManyToOne(targetEntity="Dreams\DreamBundle\Entity\Dream")
+     * @ORM\JoinColumn(name="dream_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $dream;
 
@@ -35,6 +36,11 @@ class VoteDream {
      * @ORM\ManyToOne(targetEntity="Dreams\UserBundle\Entity\User")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $vote;
 
 
     /**
@@ -91,5 +97,28 @@ class VoteDream {
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Get vote
+     *
+     * @return integer
+     */
+    public function getVote()
+    {
+        return $this->vote;
+    }
+
+    /**
+     * Set vote
+     *
+     * @param integer $vote
+     * @return VoteDream
+     */
+    public function setVote($vote)
+    {
+        $this->vote = $vote;
+
+        return $this;
     }
 }

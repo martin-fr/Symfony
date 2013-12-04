@@ -10,6 +10,8 @@ namespace Dreams\DreamBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Dreams\DreamBundle\Entity\Dream;
 use Dreams\DreamBundle\Form\DreamForm;
@@ -21,14 +23,27 @@ class DreamController extends ContainerAware {
         // appel du gestionnaire d'entites permettant de manipuler nos objets (persistance, etc.)
         $em = $this->container->get('doctrine')->getEntityManager();
 
+        // appel du gestionnaire d'entites de FOSUserBundle permettant de manipuler nos objets (persistance, etc.)
+        $userManager = $this->container->get('fos_user.user_manager');
+        // recuperation du user connecte
+        $user = $userManager->findUserByUsername($this->container->get('security.context')->getToken()->getUser());
+
         // recuperation de tous les reves
         $dreams = $em->getRepository('DreamsDreamBundle:Dream')->findAll();
+
+        // recuperation de tous les reves pour lesquels l'utilisateur connecte a deja vote
+        $dreamsVoted = $em->getRepository('DreamsDreamBundle:VoteDream')->getUserDreamsVoted($user);
+
+        // recuperation de tous les votes de reves
+        $voteDreams = $em->getRepository('DreamsDreamBundle:VoteDream')->findAll();
 
         // affichage du template show.html.twig avec les reves en parametres
         return $this->container->get('templating')->renderResponse(
             'DreamsDreamBundle:Dream:show.html.twig',
             array(
-                'dreams' => $dreams
+                'dreams' => $dreams,
+                'dreamsVoted' => $dreamsVoted,
+                'voteDreams' => $voteDreams
             ));
     }
 
@@ -228,6 +243,37 @@ class DreamController extends ContainerAware {
                 'dreams' => $dreams,
                 'search' => $search
             ));
+    }
+
+    public function voteAction() {
+
+        $request = $this->container->get('request');
+        $em = $this->container->get('doctrine')->getEntityManager();
+
+        // si le formulaire de vote a ete utilise
+        if($request->getMethod() == 'POST') {
+
+            // recuperation de l'id du reve et du vote
+            $id = $request->request->get('id');
+            $vote = $request->request->get('vote');
+
+            // recuperation du reve correspondant a l'id
+            $dream = $em->getRepository('DreamsDreamBundle:Dream')->findOneBy(array('id' => $id));
+
+            // appel du gestionnaire d'entites de FOSUserBundle permettant de manipuler nos objets (persistance, etc.)
+            $userManager = $this->container->get('fos_user.user_manager');
+            // recuperation du user connecte
+            $user = $userManager->findUserByUsername($this->container->get('security.context')->getToken()->getUser());
+
+            // vote pour le reve
+            $em->getRepository('DreamsDreamBundle:VoteDream')->createVoteDream($dream, $user, $vote);
+
+            return new Response("<small style='margin-left: 3%;'><strong>Vote enregistré !</strong></small>");
+        }
+        else {
+            return new Response("error");
+        }
+
     }
 
 } 

@@ -14,6 +14,10 @@ dreams_dream_edit:
   pattern: /edit/{id}
   defaults: { _controller: DreamsDreamBundle:Dream:edit }
 
+dreams_dream_vote:
+  pattern: /vote
+  defaults: { _controller: DreamsDreamBundle:Dream:vote }
+
 dreams_dream_delete:
   pattern: /delete/{id}
   defaults: { _controller: DreamsDreamBundle:Dream:delete }

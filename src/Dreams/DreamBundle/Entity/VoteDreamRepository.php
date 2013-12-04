@@ -3,6 +3,8 @@
 namespace Dreams\DreamBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Dreams\UserBundle\Entity\User;
+use Dreams\DreamBundle\Entity\Dream;
 
 /**
  * VoteCommentRepository
@@ -11,5 +13,71 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class VoteDreamRepository extends EntityRepository {
+
+    public function createVoteDream(Dream $dream, User $user, $vote) {
+
+        $voteDream = new VoteDream();
+        $voteDream->setDream($dream); // on affecte le reve au voteDream
+        $voteDream->setUser($user); // on affecte le user au voteDream
+        $voteDream->setVote($vote); // on affecte le vote au voteDream
+
+        // on ajoute le reve en BDD
+        $em = $this->getEntityManager();
+
+        $em->persist($voteDream);
+        $em->flush();
+
+        // actualisation de la note du reve
+        $em->getRepository('DreamsDreamBundle:Dream')->editNoteDream($dream, $vote);
+    }
+
+    public function getNbVoteDream(Dream $dream) {
+
+        $em = $this->getEntityManager();
+
+        // on recupere le nombre de vote pour le reve passe en parametre
+        $qb = $em->createQueryBuilder();
+        $qb->select('COUNT(v)')
+            ->from('DreamsDreamBundle:VoteDream', 'v')
+            ->where('v.dream = :dream')
+            ->setParameter('dream', $dream);
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getTotalVoteDream(Dream $dream) {
+
+        $em = $this->getEntityManager();
+
+        // on recupere le nombre de vote pour le reve passe en parametre
+        $qb = $em->createQueryBuilder();
+        $qb->select('SUM(v.vote)')
+            ->from('DreamsDreamBundle:VoteDream', 'v')
+            ->where('v.dream = :dream')
+            ->setParameter('dream', $dream);
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getUserDreamsVoted(User $user) {
+
+        $em = $this->getEntityManager();
+
+        // on recupere les reves pour lesquels l'utilisateur a deja vote
+        $qb = $em->createQueryBuilder();
+        $qb->select('d')
+            ->from('DreamsDreamBundle:VoteDream', 'v')
+            ->innerJoin('DreamsDreamBundle:Dream', 'd', 'WITH', 'v.dream = d')
+            ->where('v.user = :user')
+            ->setParameter('user',$user);
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 
 }
