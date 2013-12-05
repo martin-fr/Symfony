@@ -63,7 +63,7 @@ class VoteDreamRepository extends EntityRepository {
         return $query->getSingleScalarResult();
     }
 
-    public function getUserDreamsVoted(User $user) {
+    public function getUserDreamsVoted(User $user = null) {
 
         $em = $this->getEntityManager();
 

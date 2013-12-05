@@ -97,7 +97,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        {% if dream in dreamsVoted %}
+                                        {% if (dream in dreamsVoted or app.user.username is not defined) %}
                                             {% set disabled = 'disabled="disabled"' %}
                                         {% else %}
                                             {% set disabled = '' %}
