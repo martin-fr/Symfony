@@ -4,6 +4,9 @@
 
 {% block javascripts %}
     <script type="text/javascript">
+        $(function(){
+            $('.auto-submit-stars').rating()
+        });
         $(document).ready(function(){
             var keyWords = {{ search|json_encode|raw }}.split(" ");
             keyWords.forEach(function(keyWord) {
@@ -70,19 +73,71 @@
                             </tr>
                             <tr>
                                 <td width="35%">
-                                        <span class="text-warning">
-                                            <small>
-                                                <strong>Créé le</strong>
-                                                {{ dream.dateCreate|date('d/m/Y') }}
-                                                <strong>à</strong>
-                                                {{ dream.dateCreate|date('H:i')|replace({':': 'h' }) }}
-                                            </small>
-                                        </span>
+                                    <span class="text-warning">
+                                        <small>
+                                            <strong>Créé le</strong>
+                                            {{ dream.dateCreate|date('d/m/Y') }}
+                                            <strong>à</strong>
+                                            {{ dream.dateCreate|date('H:i')|replace({':': 'h' }) }}
+                                        </small>
+                                    </span>
                                 </td>
                                 <td>
-                                        <span class="text-warning">
+                                    {% set disabled = 'disabled="disabled"' %}
+                                    {% set nbVotes = 0 %}
+                                    {% for voteDream in voteDreams %}
+                                        {% if voteDream.dream == dream %}
+                                            {% set nbVotes = nbVotes + 1 %}
+                                        {% endif %}
+                                    {% endfor %}
 
-                                        </span>
+                                    {% if nbVotes > 1 %}
+                                        {% set votes = 'votes' %}
+                                    {% else %}
+                                        {% set votes = 'vote' %}
+                                    {% endif %}
+                                    <form>
+                                        <input type="hidden" name="idDream" value="{{ dream.id }}" />
+                                        {% if (dream.note >= 0.5 and dream.note < 1.5) %}
+                                            <input class="auto-submit-stars required" type="radio" name="vote_id_{{ dream.id }}" value="1" checked {{ disabled }} />
+                                        {% else %}
+                                            <input class="auto-submit-stars required" type="radio" name="vote_id_{{ dream.id }}" value="1" {{ disabled }} />
+                                        {% endif %}
+                                        {% if (dream.note >= 1.5 and dream.note < 2.5) %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="2" checked {{ disabled }} />
+                                        {% else %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="2" {{ disabled }} />
+                                        {% endif %}
+                                        {% if (dream.note >= 2.5 and dream.note < 3.5) %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="3" checked {{ disabled }} />
+                                        {% else %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="3" {{ disabled }} />
+                                        {% endif %}
+                                        {% if (dream.note >= 3.5 and dream.note < 4.5) %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="4" checked {{ disabled }} />
+                                        {% else %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="4" {{ disabled }} />
+                                        {% endif %}
+                                        {% if (dream.note >= 4.5 and dream.note <= 5) %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="5" checked {{ disabled }} />
+                                        {% else %}
+                                            <input class="auto-submit-stars" type="radio" name="vote_id_{{ dream.id }}" value="5" {{ disabled }} />
+                                        {% endif %}
+                                    </form>
+                                    <div id="votes_infos_{{ dream.id }}">
+                                        {% if nbVotes >= 1 %}
+                                            <small style="margin-left: 3%;">
+                                                (<strong>{{ dream.note|replace('.', ',') }}</strong>
+                                                pour
+                                                <strong>{{ nbVotes }}</strong>
+                                                {{ votes }})
+                                            </small>
+                                        {% else %}
+                                            <small style="margin-left: 3%;">
+                                                (<strong>Aucun vote</strong>)
+                                            </small>
+                                        {% endif %}
+                                    </div>
                                 </td>
                             </tr>
                         </table>

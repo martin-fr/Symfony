@@ -261,6 +261,9 @@ class DreamController extends ContainerAware {
             $dreams = $em->getRepository('DreamsDreamBundle:Dream')->searchDreams($search);
         }
 
+        // recuperation de tous les votes de reves
+        $voteDreams = $em->getRepository('DreamsDreamBundle:VoteDream')->findAll();
+
         $nbResultats = count($dreams);
 
         $paginator = $this->container->get('knp_paginator');
@@ -275,6 +278,7 @@ class DreamController extends ContainerAware {
             'DreamsDreamBundle:Dream:search.html.twig',
             array(
                 'pagination' => $pagination,
+                'voteDreams' => $voteDreams,
                 'search' => $search,
                 'nbResultats' => $nbResultats
             ));
