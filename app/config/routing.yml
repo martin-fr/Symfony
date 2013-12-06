@@ -10,6 +10,10 @@ dreams_comment:
     resource: "@DreamsCommentBundle/Resources/config/routing.yml"
     prefix:   /comment
 
+dreams_homepage:
+    resource: "@DreamsDreamBundle/Resources/config/routing.yml"
+    prefix:   /
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

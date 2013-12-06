@@ -1,27 +1,27 @@
 dreams_dream_show:
-  pattern: /show
+  pattern: /
   defaults: { _controller: DreamsDreamBundle:Dream:show }
 
 dreams_dream_create:
-  pattern: /create
+  pattern: /dream/create
   defaults: { _controller: DreamsDreamBundle:Dream:create }
 
 dreams_dream_mylist:
-  pattern: /mylist
+  pattern: /dream/mylist
   defaults: { _controller: DreamsDreamBundle:Dream:mylist }
 
 dreams_dream_edit:
-  pattern: /edit/{id}
+  pattern: /dream/edit/{id}
   defaults: { _controller: DreamsDreamBundle:Dream:edit }
 
 dreams_dream_vote:
-  pattern: /vote
+  pattern: /dream/vote
   defaults: { _controller: DreamsDreamBundle:Dream:vote }
 
 dreams_dream_delete:
-  pattern: /delete/{id}
+  pattern: /dream/delete/{id}
   defaults: { _controller: DreamsDreamBundle:Dream:delete }
 
 dreams_dream_search:
-  pattern: /search/
+  pattern: /dream/search/
   defaults: { _controller: DreamsDreamBundle:Dream:search }
