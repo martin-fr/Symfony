@@ -19,7 +19,8 @@ class AppKernel extends Kernel
             new Dreams\CommentBundle\DreamsCommentBundle(),
             new Dreams\DreamBundle\DreamsDreamBundle(),
             new Dreams\UserBundle\DreamsUserBundle(),
-            new FOS\UserBundle\FOSUserBundle()
+            new FOS\UserBundle\FOSUserBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

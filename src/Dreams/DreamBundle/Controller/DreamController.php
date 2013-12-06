@@ -37,11 +37,18 @@ class DreamController extends ContainerAware {
         // recuperation de tous les votes de reves
         $voteDreams = $em->getRepository('DreamsDreamBundle:VoteDream')->findAll();
 
+        $paginator = $this->container->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $dreams,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+
         // affichage du template show.html.twig avec les reves en parametres
         return $this->container->get('templating')->renderResponse(
             'DreamsDreamBundle:Dream:show.html.twig',
             array(
-                'dreams' => $dreams,
+                'pagination' => $pagination,
                 'dreamsVoted' => $dreamsVoted,
                 'voteDreams' => $voteDreams
             ));
@@ -103,14 +110,25 @@ class DreamController extends ContainerAware {
         // recuperation du user connecte
         $user = $userManager->findUserByUsername($this->container->get('security.context')->getToken()->getUser());
 
+        // recuperation de tous les votes de reves
+        $voteDreams = $em->getRepository('DreamsDreamBundle:VoteDream')->findAll();
+
         // recuperation uniquement des reves du user connecte
         $dreams = $em->getRepository('DreamsDreamBundle:Dream')->getUserDreams($user);
+
+        $paginator = $this->container->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $dreams,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
 
         // affichage du template mylist.html.twig avec les reves du user connecte en parametres
         return $this->container->get('templating')->renderResponse(
             'DreamsDreamBundle:Dream:mylist.html.twig',
             array(
-                'dreams' => $dreams
+                'pagination' => $pagination,
+                'voteDreams' => $voteDreams
             ));
     }
 
@@ -210,11 +228,18 @@ class DreamController extends ContainerAware {
         // recuperation uniquement des reves du user connecte
         $dreams = $em->getRepository('DreamsDreamBundle:Dream')->getUserDreams($user);
 
+        $paginator = $this->container->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $dreams,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+
         // affichage du template mylist.html.twig avec les reves de l'utilisateur connecte, le message et l'indicateur d'erreur
         return $this->container->get('templating')->renderResponse(
             'DreamsDreamBundle:Dream:mylist.html.twig',
             array(
-                'dreams' => $dreams,
+                'pagination' => $pagination,
                 'message' => $message,
                 'error' => $error
             ));
@@ -236,12 +261,22 @@ class DreamController extends ContainerAware {
             $dreams = $em->getRepository('DreamsDreamBundle:Dream')->searchDreams($search);
         }
 
+        $nbResultats = count($dreams);
+
+        $paginator = $this->container->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $dreams,
+            $this->container->get('request')->query->get('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+
         // affichage du template search.html.twig avec les reves correspondant a la recherche et les mots cles utilises
         return $this->container->get('templating')->renderResponse(
             'DreamsDreamBundle:Dream:search.html.twig',
             array(
-                'dreams' => $dreams,
-                'search' => $search
+                'pagination' => $pagination,
+                'search' => $search,
+                'nbResultats' => $nbResultats
             ));
     }
 

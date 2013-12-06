@@ -31,6 +31,8 @@ return array(
     'FOS\\RestBundle' => array($vendorDir . '/friendsofsymfony/rest-bundle'),
     'FOS\\Rest' => array($vendorDir . '/friendsofsymfony/rest'),
     'FOS\\CommentBundle' => array($vendorDir . '/friendsofsymfony/comment-bundle'),
+    'Knp\Component' => $vendorDir . '/knplabs/knp-components/src/',
+    'Knp\Bundle\PaginatorBundle' => $vendorDir . '/knplabs/knp-paginator-bundle/',
     'Doctrine\\ORM' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),

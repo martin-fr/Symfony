@@ -10,8 +10,6 @@
                     var id = this.form.elements['idDream'].value;
                     var name = 'vote_id_'+id;
 
-                    //alert("Vous avez voté '" + value + "/5 pour le rêve " + id + ".");
-
                     $.ajax({
                         type: "POST",
                         url: "{{ path('dreams_dream_vote') }}",
@@ -19,11 +17,8 @@
                         cache: false,
                         success: function(data)
                         {
+                            //window.location.reload(true);
                             $('#votes_infos_'+id).html(data);
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown)
-                        {
-                            alert('Error : ' + errorThrown);
                         }
                     });
 
@@ -38,7 +33,7 @@
 
     <h2>Liste des derniers <span class="text-danger">rêves</span>.</h2><br />
 
-    {% for dream in dreams %}
+    {% for dream in pagination %}
         {% set nbVotes = 0 %}
 
         <div class="row">
@@ -97,7 +92,8 @@
                                         </span>
                                     </td>
                                     <td>
-                                        {% if (dream in dreamsVoted or app.user.username is not defined) %}
+                                        <div id="votedream_{{ dream.id }}">
+                                        {% if (dream in dreamsVoted or app.user.username is not defined or app.user == dream.user) %}
                                             {% set disabled = 'disabled="disabled"' %}
                                         {% else %}
                                             {% set disabled = '' %}
@@ -151,7 +147,12 @@
                                                     <strong>{{ nbVotes }}</strong>
                                                     {{ votes }})
                                                 </small>
+                                            {% else %}
+                                                <small style="margin-left: 3%;">
+                                                    (<strong>Aucun vote</strong>)
+                                                </small>
                                             {% endif %}
+                                        </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -169,5 +170,13 @@
             </div>
         </div>
     {% endfor %}
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="navigation" style="text-align: center;">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

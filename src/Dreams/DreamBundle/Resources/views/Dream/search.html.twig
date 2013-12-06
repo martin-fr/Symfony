@@ -16,15 +16,15 @@
 
 {% block content %}
 
-    {% if dreams|length == 0 %}
+    {% if nbResultats == 0 %}
         <h2>Il n'y a aucun résultat pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
-    {% elseif dreams|length == 1 %}
-        <h2>Il y a {{ dreams|length }} résultat pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+    {% elseif nbResultats == 1 %}
+        <h2>Il y a {{ nbResultats }} résultat pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
     {% else %}
-        <h2>Il y a {{ dreams|length }} résultats pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
+        <h2>Il y a {{ nbResultats }} résultats pour la recherche : <span class="text-danger">{{ search }}</span>.</h2><br />
     {% endif %}
 
-    {% for dream in dreams %}
+    {% for dream in pagination %}
 
         <div class="row">
         <div class="col-lg-8">
@@ -99,5 +99,13 @@
             </div>
         </div>
     {% endfor %}
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="navigation" style="text-align: center;">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
