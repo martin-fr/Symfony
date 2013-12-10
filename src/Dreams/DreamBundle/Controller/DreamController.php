@@ -41,7 +41,7 @@ class DreamController extends ContainerAware {
         $pagination = $paginator->paginate(
             $dreams,
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            5/*limit per page*/
         );
 
         // affichage du template show.html.twig avec les reves en parametres
@@ -120,7 +120,7 @@ class DreamController extends ContainerAware {
         $pagination = $paginator->paginate(
             $dreams,
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            5/*limit per page*/
         );
 
         // affichage du template mylist.html.twig avec les reves du user connecte en parametres
@@ -232,7 +232,7 @@ class DreamController extends ContainerAware {
         $pagination = $paginator->paginate(
             $dreams,
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            5/*limit per page*/
         );
 
         // affichage du template mylist.html.twig avec les reves de l'utilisateur connecte, le message et l'indicateur d'erreur
@@ -270,7 +270,7 @@ class DreamController extends ContainerAware {
         $pagination = $paginator->paginate(
             $dreams,
             $this->container->get('request')->query->get('page', 1)/*page number*/,
-            2/*limit per page*/
+            5/*limit per page*/
         );
 
         // affichage du template search.html.twig avec les reves correspondant a la recherche et les mots cles utilises
