@@ -5,3 +5,15 @@ dreams_comment_homepage:
 dreams_comment_show:
   pattern: /show
   defaults: { _controller: DreamsCommentBundle:Comment:show }
+
+dreams_comment_create:
+  pattern: /create
+  defaults: { _controller: DreamsCommentBundle:Comment:create }
+
+dreams_comment_edit:
+  pattern: /edit/{id}
+  defaults: { _controller: DreamsCommentBundle:Comment:edit }
+
+dreams_comment_delete:
+  pattern: /delete/{id}
+  defaults: { _controller: DreamsCommentBundle:Comment:delete }

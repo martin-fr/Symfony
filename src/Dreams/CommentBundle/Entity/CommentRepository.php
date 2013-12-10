@@ -3,6 +3,7 @@
 namespace Dreams\CommentBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Dreams\UserBundle\Entity\User;
 
 /**
  * CommentRepository
@@ -11,5 +12,13 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class CommentRepository extends EntityRepository {
+
+    public function createComment(Comment $comment, User $user = null){
+                $comment->setUser($user);
+                //on ajoute le commentaire dans la BDD
+                $em = $this->getEntityManager();
+                $em->persist($comment);
+                $em->flush();
+    }
 
 }

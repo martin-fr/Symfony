@@ -10,7 +10,7 @@
         <link href=" {{asset('bundles/bootstrap/css/bootswatch.min.css')}}" rel="stylesheet">
     </head>
     <body>
-
+    {% block showComment %}{% endblock %}
     <div class="navbar navbar-default navbar-fixed-top">
     <!-- Conteneur principal -->
         <div class="container">
@@ -54,10 +54,9 @@
             </div>
         </div>
     </div>
-
+    {% block createComment %}{% endblock %}
     <div class="container">
         <div id="content">
-            {% block content %}{% endblock %}
         </div>
 
     <footer>

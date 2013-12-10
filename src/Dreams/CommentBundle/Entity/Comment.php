@@ -54,6 +54,13 @@ class Comment
      */
     private $user;
 
+    public function __construct()
+    {
+        $this->dateCreate = new \DateTime('now');
+        $this->dateUpdate = new \DateTime('now');
+        $this->note = 0;
+    }
+
     /**
      * Get id
      *

@@ -1,0 +1,13 @@
+{% extends "DreamsCommentBundle::base.html.twig" %}
+{% block createComment %}
+<h1>Ajouter un commentaire</h1>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+
+<form action="" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" />
+</form>
+{% endblock %}

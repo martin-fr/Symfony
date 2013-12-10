@@ -1,6 +1,25 @@
 {% extends "DreamsCommentBundle::base.html.twig" %}
 {% block title %} Ajouter un comm {% endblock %}
 
-{% block content %}
-    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 'foo'} %}
+{% block showComment %}
+<h1>Liste des commentaires</h1>
+
+<table>
+    {% for c in comments %}
+        <tr>
+            {# verifie qu'un utilisateur est attribue au commentaire #}
+            {% if c.user %}
+                <td>{{ c.user.username }}</td>
+            {# sinon nous inscrivons Anonyme en dur #}
+            {% else %}
+                <td> Anonyme </td>
+            {% endif %}
+            <td>{{ c.description }}</td>
+            <td>{{ c.id }}</td>
+            <td>{{ c.dateCreate|date('d/m/Y') }}</td>
+        </tr>
+    {% else %}
+        <tr><td>Aucun commentaire n'a été trouvé.</td></tr>
+    {% endfor %}
+</table>
 {% endblock %}
