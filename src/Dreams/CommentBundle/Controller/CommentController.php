@@ -36,6 +36,7 @@ class CommentController extends ContainerAware {
         $userManager = $this->container->get('fos_user.user_manager');
         // recuperation du user connecte
         $user = $userManager->findUserByUsername($this->container->get('security.context')->getToken()->getUser());
+        $answerTo = null;
 
         if ($request->getMethod() == 'POST')
         {
@@ -44,7 +45,7 @@ class CommentController extends ContainerAware {
             if ($form->isValid())
             {
                 $em = $this->container->get('doctrine')->getEntityManager();
-                $em->getRepository('DreamsCommentBundle:Comment')->createComment($comment, $user);
+                $em->getRepository('DreamsCommentBundle:Comment')->createComment($comment, $user, $answerTo);
                 $message='Commentaire ajouté avec succès !';
             }
         }
@@ -54,6 +55,37 @@ class CommentController extends ContainerAware {
             'form' => $form->createView(),
             'message' => $message,
         ));
+    }
+
+    public function answerToAction($id)
+    {
+        $message = 'ceci est le message';
+        $em = $this->container->get('doctrine')->getEntityManager();
+        $comment = new Comment();
+        $form = $this->container->get('form.factory')->create(new CommentForm(), $comment);
+        $request = $this->container->get('request');
+        //appel du gestionnaire d'entites de FOSUserBundle permettant de manipuler nos objets (persistance, etc.)
+        $userManager = $this->container->get('fos_user.user_manager');
+        // recuperation du user connecte
+        $user = $userManager->findUserByUsername($this->container->get('security.context')->getToken()->getUser());
+        $answerTo = $em->getRepository('DreamsCommentBundle:Comment')->findOneBy(array('id' => $id));
+
+        if ($request->getMethod() == 'POST')
+        {
+            $form->bind($request);
+
+            if ($form->isValid())
+            {
+                $em->getRepository('DreamsCommentBundle:Comment')->createComment($comment, $user, $answerTo);
+                $message='Commentaire ajouté avec succès !';
+            }
+        }
+        return $this->container->get('templating')->renderResponse(
+            'DreamsCommentBundle:Comment:create.html.twig',
+            array(
+                'form' => $form->createView(),
+                'message' => $message,
+            ));
     }
 
     public function editAction($id)

@@ -17,6 +17,7 @@
             <td>{{ c.description }}</td>
             <td>{{ c.id }}</td>
             <td>{{ c.dateCreate|date('d/m/Y') }}</td>
+            <td><a href="{{ path('dreams_comment_answerTo', {'id': c.id}) }}">Répondre à</a></td>
         </tr>
     {% else %}
         <tr><td>Aucun commentaire n'a été trouvé.</td></tr>

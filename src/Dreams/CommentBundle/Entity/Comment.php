@@ -40,7 +40,7 @@ class Comment
     private $note;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="Dreams\CommentBundle\Entity\Comment")
      */
     private $answerTo;
 
@@ -166,20 +166,20 @@ class Comment
     /**
      * Set answerTo
      *
-     * @param integer $answerTo
+     * @param \Dreams\CommentBundle\Entity\Comment $answerTo
      * @return Comment
      */
-    public function setAnswerTo($answerTo)
+    public function setAnswerTo(\Dreams\CommentBundle\Entity\Comment $answerTo = null)
     {
         $this->answerTo = $answerTo;
-    
+
         return $this;
     }
 
     /**
      * Get answerTo
      *
-     * @return integer 
+     * @return \Dreams\CommentBundle\Entity\Comment
      */
     public function getAnswerTo()
     {

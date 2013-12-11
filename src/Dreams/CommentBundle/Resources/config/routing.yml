@@ -17,3 +17,7 @@ dreams_comment_edit:
 dreams_comment_delete:
   pattern: /delete/{id}
   defaults: { _controller: DreamsCommentBundle:Comment:delete }
+
+dreams_comment_answerTo:
+  pattern: /answerTo/{id}
+  defaults: { _controller: DreamsCommentBundle:Comment:answerTo }
