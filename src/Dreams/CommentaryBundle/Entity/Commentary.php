@@ -39,27 +39,4 @@ class Commentary extends BaseComment
     {
         return $this->id;
     }
-
-    /**
-     * Set thread
-     *
-     * @param \Dreams\CommentaryBundle\Entity\Thread $thread
-     * @return Commentary
-     */
-    public function setThread(\Dreams\CommentaryBundle\Entity\Thread $thread = null)
-    {
-        $this->thread = $thread;
-    
-        return $this;
-    }
-
-    /**
-     * Get thread
-     *
-     * @return \Dreams\CommentaryBundle\Entity\Thread 
-     */
-    public function getThread()
-    {
-        return $this->thread;
-    }
 }
