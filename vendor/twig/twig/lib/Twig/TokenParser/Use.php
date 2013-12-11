@@ -42,20 +42,26 @@ class Twig_TokenParser_Use extends Twig_TokenParser
         }
 
         $targets = array();
-        if ($stream->nextIf('with')) {
+        if ($stream->test('with')) {
+            $stream->next();
+
             do {
                 $name = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
 
                 $alias = $name;
-                if ($stream->nextIf('as')) {
+                if ($stream->test('as')) {
+                    $stream->next();
+
                     $alias = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
                 }
 
                 $targets[$name] = new Twig_Node_Expression_Constant($alias, -1);
 
-                if (!$stream->nextIf(Twig_Token::PUNCTUATION_TYPE, ',')) {
+                if (!$stream->test(Twig_Token::PUNCTUATION_TYPE, ',')) {
                     break;
                 }
+
+                $stream->next();
             } while (true);
         }
 

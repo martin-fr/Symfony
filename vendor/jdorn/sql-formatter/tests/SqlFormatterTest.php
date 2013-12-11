@@ -25,20 +25,6 @@ class SqlFormatterTest extends PHPUnit_Framework_TestCase {
 	function testHighlight($sql, $html) {
 		$this->assertEquals(trim($html), trim(SqlFormatter::highlight($sql)));
 	}
-	/**
-	 * @dataProvider highlightCliData
-	 */
-	function testCliHighlight($sql, $html) {
-		SqlFormatter::$cli = true;
-		$this->assertEquals(trim($html), trim(SqlFormatter::format($sql)));
-		SqlFormatter::$cli = false;
-	}
-	/**
-	 * @dataProvider compressData
-	 */
-	function testCompress($sql, $html) {
-		$this->assertEquals(trim($html), trim(SqlFormatter::compress($sql)));
-	}
 	
 	function testUsePre() {
 		SqlFormatter::$use_pre = false;
@@ -72,7 +58,7 @@ class SqlFormatterTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	function testRemoveComments() {
-		$expected = SqlFormatter::format("SELECT\n * FROM\n MyTable",false);
+		$expected = "SELECT\n * FROM\n MyTable";
 		$sql = "/* this is a comment */SELECT#This is another comment\n * FROM-- One final comment\n MyTable";
 		$actual = SqlFormatter::removeComments($sql);
 		
@@ -96,20 +82,7 @@ class SqlFormatterTest extends PHPUnit_Framework_TestCase {
 			);
 		}
 		
-		return $return;
-	}
-	
-	function highlightCliData() {
-		$clidata = explode("\n\n",file_get_contents(__DIR__."/clihighlight.html"));
-		$sqlData = $this->sqlData();
-		
-		$return = array();
-		foreach($clidata as $i=>$data) {
-			$return[] = array(
-				$sqlData[$i],
-				$data
-			);
-		}
+		//$return = array_slice($return, 0, 50);
 		
 		return $return;
 	}
@@ -126,21 +99,7 @@ class SqlFormatterTest extends PHPUnit_Framework_TestCase {
 			);
 		}
 		
-		return $return;
-	}
-	
-	function compressData() {
-		$compressData = explode("\n\n",file_get_contents(__DIR__."/compress.html"));
-		$sqlData = $this->sqlData();
-		
-		$return = array();
-		foreach($compressData as $i=>$data) {
-			$return[] = array(
-				$sqlData[$i],
-				$data
-			);
-		}
-		
+		//$return = array_slice($return, 0, 50);
 		return $return;
 	}
 	
@@ -156,6 +115,7 @@ class SqlFormatterTest extends PHPUnit_Framework_TestCase {
 			);
 		}
 		
+		//$return = array_slice($return, 0, 50);
 		return $return;
 	}
 	
@@ -170,25 +130,16 @@ class SqlFormatterTest extends PHPUnit_Framework_TestCase {
 		$formatHighlight = array();
 		$highlight = array();
 		$format = array();
-		$compress = array();
-		$clihighlight = array();
 		
 		foreach($this->sqlData as $sql) {
 			$formatHighlight[] = trim(SqlFormatter::format($sql));
 			$highlight[] = trim(SqlFormatter::highlight($sql));
 			$format[] = trim(SqlFormatter::format($sql, false));
-			$compress[] = trim(SqlFormatter::compress($sql));
-			
-			SqlFormatter::$cli = true;
-			$clihighlight[] = trim(SqlFormatter::format($sql));
-			SqlFormatter::$cli = false;
 		}
 		
 		file_put_contents(__DIR__."/format-highlight.html", implode("\n\n",$formatHighlight));
 		file_put_contents(__DIR__."/highlight.html", implode("\n\n",$highlight));
 		file_put_contents(__DIR__."/format.html", implode("\n\n",$format));
-		file_put_contents(__DIR__."/compress.html", implode("\n\n",$compress));
-		file_put_contents(__DIR__."/clihighlight.html", implode("\n\n",$clihighlight));
 		/**/
 		
 		return $this->sqlData;
