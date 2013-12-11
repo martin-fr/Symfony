@@ -27,7 +27,6 @@ Filters
     raw
     replace
     reverse
-    round
     slice
     sort
     split

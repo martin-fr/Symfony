@@ -36,15 +36,19 @@ class Twig_TokenParser_From extends Twig_TokenParser
             $name = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
 
             $alias = $name;
-            if ($stream->nextIf('as')) {
+            if ($stream->test('as')) {
+                $stream->next();
+
                 $alias = $stream->expect(Twig_Token::NAME_TYPE)->getValue();
             }
 
             $targets[$name] = $alias;
 
-            if (!$stream->nextIf(Twig_Token::PUNCTUATION_TYPE, ',')) {
+            if (!$stream->test(Twig_Token::PUNCTUATION_TYPE, ',')) {
                 break;
             }
+
+            $stream->next();
         } while (true);
 
         $stream->expect(Twig_Token::BLOCK_END_TYPE);

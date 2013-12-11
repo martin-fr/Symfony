@@ -4,23 +4,40 @@
 {% block showComment %}
 <h1>Liste des commentaires</h1>
 
-<table>
+
     {% for c in comments %}
-        <tr>
-            {# verifie qu'un utilisateur est attribue au commentaire #}
-            {% if c.user %}
-                <td>{{ c.user.username }}</td>
-            {# sinon nous inscrivons Anonyme en dur #}
-            {% else %}
-                <td> Anonyme </td>
-            {% endif %}
-            <td>{{ c.description }}</td>
-            <td>{{ c.id }}</td>
-            <td>{{ c.dateCreate|date('d/m/Y') }}</td>
-            <td><a href="{{ path('dreams_comment_answerTo', {'id': c.id}) }}">Répondre à</a></td>
-        </tr>
+        {% if c.answerTo is null %}
+            <div>
+                {# verifie qu'un utilisateur est attribue au commentaire #}
+                {% if c.user %}
+                    {{ c.user.username }}
+                {# sinon nous inscrivons Anonyme en dur #}
+                {% else %}
+                    Anonyme
+                {% endif %}
+                {{ c.description }}
+                {{ c.id }}
+                {{ c.dateCreate|date('d/m/Y') }}
+                <a href="{{ path('dreams_comment_answerTo', {'id': c.id}) }}">Répondre à</a>
+            </div>
+        {% endif %}
+        {% if c.answerTo == c %}
+            <div style="margin-left: 15px;">
+                {# verifie qu'un utilisateur est attribue au commentaire #}
+                {% if c.user %}
+                    {{ c.user.username }}
+                    {# sinon nous inscrivons Anonyme en dur #}
+                {% else %}
+                    Anonyme
+                {% endif %}
+                {{ c.description }}
+                {{ c.id }}
+                {{ c.dateCreate|date('d/m/Y') }}
+                <a href="{{ path('dreams_comment_answerTo', {'id': c.id}) }}">Répondre à</a>
+            </div>
+        {% endif %}
     {% else %}
         <tr><td>Aucun commentaire n'a été trouvé.</td></tr>
     {% endfor %}
-</table>
+
 {% endblock %}

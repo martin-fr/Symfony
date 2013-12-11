@@ -41,10 +41,12 @@ class Twig_TokenParser_Block extends Twig_TokenParser
         $this->parser->pushLocalScope();
         $this->parser->pushBlockStack($name);
 
-        if ($stream->nextIf(Twig_Token::BLOCK_END_TYPE)) {
+        if ($stream->test(Twig_Token::BLOCK_END_TYPE)) {
+            $stream->next();
+
             $body = $this->parser->subparse(array($this, 'decideBlockEnd'), true);
-            if ($token = $stream->nextIf(Twig_Token::NAME_TYPE)) {
-                $value = $token->getValue();
+            if ($stream->test(Twig_Token::NAME_TYPE)) {
+                $value = $stream->next()->getValue();
 
                 if ($value != $name) {
                     throw new Twig_Error_Syntax(sprintf("Expected endblock for block '$name' (but %s given)", $value), $stream->getCurrent()->getLine(), $stream->getFilename());

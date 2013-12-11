@@ -9,7 +9,7 @@ Returns a list containing an arithmetic progression of integers:
         {{ i }},
     {% endfor %}
 
-    {# outputs 0, 1, 2, 3, #}
+    {# returns 0, 1, 2, 3 #}
 
 When step is given (as the third parameter), it specifies the increment (or
 decrement):
@@ -20,7 +20,7 @@ decrement):
         {{ i }},
     {% endfor %}
 
-    {# outputs 0, 2, 4, 6, #}
+    {# returns 0, 2, 4, 6 #}
 
 The Twig built-in ``..`` operator is just syntactic sugar for the ``range``
 function (with a step of 1):
