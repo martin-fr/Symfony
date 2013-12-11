@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit backupGlobals="false"
@@ -23,3 +24,30 @@
         </exclude>
     </groups>
 </phpunit>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         bootstrap="tests/bootstrap.php"
+>
+         
+    <testsuites>
+        <testsuite name="JMS Serializer Test Suite">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+    
+    <groups>
+        <exclude>
+            <group>performance</group>
+        </exclude>
+    </groups>
+</phpunit>
+>>>>>>> 35fd0b3de67fbf59470d5130a49ad44f0edaeb80
