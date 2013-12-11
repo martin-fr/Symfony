@@ -1,3 +1,7 @@
+dreams_commentary:
+    resource: "@DreamsCommentaryBundle/Resources/config/routing.yml"
+    prefix:   /
+
 dreams_user:
     resource: "@DreamsUserBundle/Resources/config/routing.yml"
     prefix:   /user

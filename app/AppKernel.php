@@ -23,7 +23,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this)
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new Dreams\CommentaryBundle\DreamsCommentaryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
