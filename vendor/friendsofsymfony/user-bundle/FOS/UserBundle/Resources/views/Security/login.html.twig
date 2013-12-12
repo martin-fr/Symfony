@@ -2,9 +2,25 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block javascript %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#inscription").hide();
+            $("#inscription").fadeIn(5000);
+        });
+    </script>
+{% endblock %}
+
 {% block fos_user_content %}
 
     <div class="container">
+
+        <div id="inscription">
+            <blockquote class="oval-thought">
+                <p><a href="{{ path('fos_user_registration_register') }}">Pas encore inscrit ?</a></p>
+            </blockquote>
+        </div>
+
         <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin" style="text-align:center">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
